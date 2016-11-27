@@ -6,20 +6,29 @@
 
     $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+    if(isset($_POST['delete'])){
+
+        $delete_id = $_POST['delete_id'];
+
+        $database->query('DELETE FROM posts WHERE id = :id');
+        $database->bind(':id', $delete_id);
+        $database->execute();
+
+    }
+
     if(isset($_POST['submit'])){
 
+        $id = $post['id'];
         $title = $post['title'];
         $body = $post['body'];
 
-        $database->query('INSERT INTO posts (title, body) VALUES(:title, :body)');
+        $database->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
+        $database->bind(':id', $id);
         $database->bind(':title', $title);
         $database->bind(':body', $body);
         $database->execute();
         
-        if($database->lastInsertId()){
-            echo "<p>Post added</p>";
-        }
-
+        
     }
 
     $database->query('SELECT * FROM posts');
@@ -31,6 +40,8 @@
     <h1>Add Post</h1>
 
     <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+        <label for="title">Post ID</label><br />
+        <input type="text" name="id" placeholder="ID..." /> <br /><br />
         <label for="title">Title</label><br />
         <input type="text" name="title" placeholder="The Story..." /> <br /><br />
         <label for="body">Body</label> <br />
@@ -42,7 +53,14 @@
     
     foreach($rows as $row){
         echo "<h1>" . $row['title'] . "</h1>";
-        echo "<p>" . $row['body'] . "</p>";
+        echo "<p>" . $row['body'] . "</p>"; ?>
+
+        <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
+            <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+            <input type="submit" name="delete" value="Delete">
+        </form>
+
+        <?php
     }
 
 ?>
