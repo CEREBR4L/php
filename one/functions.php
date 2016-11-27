@@ -40,8 +40,8 @@
 	 fuckItUp($cost, $tax);
 
 	 //default arguments in functions -- if no tax is passed in .654 is used as a default
-	 function defaultArgs($cost, $tax=.654){
-	 	echo $cost + ($cost * tax);
+	 function defaultArgs($cost, $tax=0.654){
+	 	echo $cost + ($cost * $tax);
 	 }
 
 	 //tax will use default
