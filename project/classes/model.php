@@ -60,6 +60,10 @@ abstract class Model{
 
     }
 
+    public function lastInsertId(){
+        return $this->dbh->lastInsertId();
+    }
+
 }
 
 ?>

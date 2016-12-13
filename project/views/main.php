@@ -2,8 +2,8 @@
 
     <head>
         <title>Shareboards</title>
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/style.css">
     </head>
 
     <body>
@@ -16,7 +16,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Shareboard</a>
+            <a class="navbar-brand" href="<?php echo ROOT_URL; ?>">Shareboard</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
 
