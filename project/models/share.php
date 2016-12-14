@@ -18,6 +18,13 @@
             $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             if($post['submit']){
+
+                if($post['title'] == '' || $post['bodu'] == '' || $post['link'] == ''){
+                    
+                    Messages::setMsg('Please fill in all post information', 'error');
+                    return; 
+
+                }
                 
                 //insert into mysql 
                 $this->query(" INSERT INTO shares(title, body, link, user_id) " . 

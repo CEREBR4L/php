@@ -1,10 +1,15 @@
 
 <?php
     
+    //start session 
+
+    session_start();
+
     require('config.php');
     require('classes/bootstrap.php');
     require('classes/controller.php');
     require('classes/model.php');
+    require('classes/messages.php');
 
     require('controllers/home.php');
     require('controllers/shares.php');
