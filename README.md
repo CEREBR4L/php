@@ -1,4 +1,4 @@
 # PHP
 
-I am learning php, this repo is for learning things because why not.
+A repo to document PHP learning. It might just be fun.
 
