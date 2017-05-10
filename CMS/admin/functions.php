@@ -1,7 +1,6 @@
 <?php 
 
     function confirm($result){
-        
         global $connect;
 
         if(!$result){
