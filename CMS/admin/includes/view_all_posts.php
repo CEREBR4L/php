@@ -36,11 +36,21 @@
                 $post_comment_count = $row['post_comment_count'];
                 $post_date = $row['post_date'];
 
+                $query =  "SELECT * FROM categories";
+                $query .= " WHERE cat_id = {$post_category_id}";
+
+                $select_categories_id = mysqli_query($connect, $query);
+
+                while($row = mysqli_fetch_assoc($select_categories_id)){
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
+                }
+
                 echo "<tr>";
                 echo "<td>{$post_id}</td>";
                 echo "<td>{$post_author}</td>";
                 echo "<td>{$post_title}</td>";
-                echo "<td>{$post_category_id}</td>";
+                echo "<td>{$cat_title}</td>";
                 echo "<td>{$post_status}</td>";
                 echo "<td><img src='../images/{$post_image}' width='100' ></td>";
                 echo "<td>{$post_tags}</td>";
