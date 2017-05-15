@@ -20,6 +20,41 @@
                 $post_date = $row['post_date'];
                 $post_text = $row['post_content'];
     }
+
+    if(isset($_POST['update_post'])){
+        
+        $title = $_POST['title'];
+        $post_category = $_POST['post_category'];
+        $author = $_POST['author'];
+        $post_status = $_POST['post_status'];
+        $post_img = $_FILES['post_image']['name'];
+        $post_img_temp = $_FILES['post_image']['tmp_name'];
+        $post_tags = $_POST['post_tags'];
+        $post_content = $_POST['post_content'];
+        
+        move_uploaded_file($post_img_temp, "../images/$post_img");
+
+        if(empty($post_img)){
+            $query = "SELECT * FROM posts WHERE post_id = $p_id";
+            $get_img = mysqli_query($connect, $query);
+            while($row = mysqli_fetch_array($get_img)){ $post_img = $row['post_image']; }
+        }
+
+        $query =  "UPDATE posts SET ";
+        $query .= "post_title = '{$title}', "; 
+        $query .= "post_author = '{$author}', "; 
+        $query .= "post_category_id = '{$post_category}', "; 
+        $query .= "post_date = now(), "; 
+        $query .= "post_status = '{$post_status}', "; 
+        $query .= "post_tags = '{$post_tags}', "; 
+        $query .= "post_content = '{$post_content}', "; 
+        $query .= "post_image = '{$post_img}' "; 
+        $query .= "WHERE post_id = {$p_id} "; 
+        
+        $update_post_query = mysqli_query($connect, $query);
+        confirm($update_post_query);
+
+    }
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -32,8 +67,7 @@
     <div class="form-group">
         <label for="post_category">Post Category ID</label>
         <br>
-        <!--<input value="<?php //echo $post_category_id; ?>" type="text" class="form-control" name="post_category">-->
-        <select name="" id="" class="form-control">
+        <select name="post_category" id="" class="form-control">
             <?php 
                 $qry = "SELECT * FROM categories";
                 $select_categories = mysqli_query($connect, $qry);
@@ -61,7 +95,8 @@
     <div class="form-group">
         <label for="post_image">Post Image</label>
         <br>
-        <img width="300px" src="../images/<?php echo $post_image; ?>" alt="img">   
+        <img width="300px" src="../images/<?php echo $post_image; ?>" alt="img">
+        <input type="file" name="post_image">      
     </div>
 
     <div class="form-group">
@@ -77,7 +112,7 @@
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Submit Post">    
+        <input class="btn btn-primary" type="submit" name="update_post" value="Submit Post">    
     </div>
 
 </form>
