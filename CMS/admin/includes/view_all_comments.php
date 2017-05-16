@@ -5,15 +5,15 @@
         <tr>
             <th>ID</th>
             <th>Author</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Image</th>
-            <th>Tags</th>
-            <th>Comments</th>
+            <th>Email</th>
+            <th>Post</th>
+            <th>Comment</th>
             <th>Date</th>
+            <th>Status</th>
+            <th>Approve</th>
+            <th>Unapprove</th>
             <th>Edit</th>
-            <th>Remove?</th>
+            <th>Remove</th>
         </tr>
     </thead>
 
@@ -26,36 +26,34 @@
 
             while($row = mysqli_fetch_assoc($select_comments)){
 
-                $post_id = $row['post_id'];
-                $post_author = $row['post_author'];
-                $post_title = $row['post_title'];
-                $post_category_id = $row['post_category_id'];
-                $post_status = $row['post_status'];
-                $post_image = $row['post_image'];
-                $post_tags = $row['post_tags'];
-                $post_comment_count = $row['post_comment_count'];
-                $post_date = $row['post_date'];
+                $comment_id = $row['comment_id'];
+                $comment_author = $row['comment_author'];
+                $comment_email = $row['comment_email'];
+                $comment_post_id = $row['comment_post_id'];
+                $comment_content = $row['comment_content'];
+                $comment_date = $row['comment_date'];
+                $comment_status = $row['comment_status'];
 
-                $query =  "SELECT * FROM categories";
-                $query .= " WHERE cat_id = {$post_category_id}";
+                $query =  "SELECT * FROM posts";
+                $query .= " WHERE post_id = {$comment_post_id}";
 
-                $select_categories_id = mysqli_query($connect, $query);
+                $select_posts_id = mysqli_query($connect, $query);
 
-                while($row = mysqli_fetch_assoc($select_categories_id)){
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
+                while($row = mysqli_fetch_assoc($select_posts_id)){
+                    $post_id = $row['post_id'];
+                    $post_title = $row['post_title'];
                 }
 
                 echo "<tr>";
-                echo "<td>{$post_id}</td>";
-                echo "<td>{$post_author}</td>";
+                echo "<td>{$comment_id}</td>";
+                echo "<td>{$comment_author}</td>";
+                echo "<td>{$comment_email}</td>";
                 echo "<td>{$post_title}</td>";
-                echo "<td>{$cat_title}</td>";
-                echo "<td>{$post_status}</td>";
-                echo "<td><img src='../images/{$post_image}' width='100' ></td>";
-                echo "<td>{$post_tags}</td>";
-                echo "<td>{$post_comment_count}</td>";
-                echo "<td>{$post_date}</td>";
+                echo "<td>{$comment_content}</td>";
+                echo "<td>{$comment_date}</td>";
+                echo "<td>{$comment_status}</td>";
+                echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Approve</a></td>";
+                echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Unapprove</a></td>";
                 echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
                 echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
                 echo "</tr>";
