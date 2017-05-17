@@ -67,6 +67,10 @@
                         $qry  = "INSERT INTO comments(comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
                         $qry .= " VALUES({$p_id}, '{$comment_author}', '{$comment_email}', '{$comment}', 'unapproved', now())";
                         $submit_comment = mysqli_query($connect, $qry);
+                        
+                        if(!$submit_comment){
+                            die("Failed to create comment: " . mysqli_error($connect));
+                        }
                     }
                  ?>
 
