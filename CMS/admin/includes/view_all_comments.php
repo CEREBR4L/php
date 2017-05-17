@@ -69,8 +69,9 @@
 
 <?php
     if(isset($_GET['delete'])){
-        $del_post_id = $_GET['delete'];
-        $query = "DELETE FROM posts WHERE post_id = {$del_post_id}";
+        $del_comment_id = $_GET['delete'];
+        $query = "DELETE FROM comments WHERE comment_id = {$del_comment_id}";
         $delete_qry = mysqli_query($connect, $query);
+        header("Location: comments.php");
     }
 ?>
