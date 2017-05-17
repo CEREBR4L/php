@@ -48,7 +48,7 @@
                 echo "<td>{$comment_id}</td>";
                 echo "<td>{$comment_author}</td>";
                 echo "<td>{$comment_email}</td>";
-                echo "<td>{$post_title}</td>";
+                echo "<td><a href='../post.php?p_id={$comment_post_id}'>{$post_title}</a></td>";
                 echo "<td>{$comment_content}</td>";
                 echo "<td>{$comment_date}</td>";
                 echo "<td>{$comment_status}</td>";
