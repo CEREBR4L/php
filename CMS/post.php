@@ -71,6 +71,15 @@
                         if(!$submit_comment){
                             die("Failed to create comment: " . mysqli_error($connect));
                         }
+
+                        $qry  = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+                        $qry .= "WHERE post_id = {$p_id}";
+                        $submit_comment = mysqli_query($connect, $qry);
+                        
+                        if(!$submit_comment){
+                            die("Failed to update comment count: " . mysqli_error($connect));
+                        }
+
                     }
                  ?>
 
