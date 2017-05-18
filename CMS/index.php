@@ -17,9 +17,11 @@
                 <!-- First Blog Post -->
                 <?php 
 
-                    $query = "SELECT * FROM posts";
+                    $query = "SELECT * FROM posts WHERE post_status = 'published'";
                     $select_all_posts_query = mysqli_query($connect, $query);
-
+                    if(mysqli_num_rows($select_all_posts_query) == 0){
+                        echo "<h1>No Posts here!</h1>";
+                    }
                     while($row = mysqli_fetch_assoc($select_all_posts_query)){
 
                         $post_id = $row['post_id'];
@@ -28,6 +30,7 @@
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
                         $post_content = substr($row['post_content'], 0, 200);
+                        $post_status = $row['post_status'];
 
                         ?>
 
@@ -49,7 +52,7 @@
                         <hr>
 
                         <?php
-
+                        
                     }
 
                 ?>
