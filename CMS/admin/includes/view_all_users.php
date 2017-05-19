@@ -10,10 +10,8 @@
             <th>User Img</th>
             <th>User Email</th>
             <th>User Role</th>
-            <th>Approve</th>
-            <th>Unapprove</th>
             <th>Edit</th>
-            <th>Remove</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
@@ -34,28 +32,16 @@
                 $user_email = $row['user_email'];
                 $user_role = $row['user_role'];
 
-                $query =  "SELECT * FROM posts";
-                $query .= " WHERE post_id = {$comment_post_id}";
-
-                $select_posts_id = mysqli_query($connect, $query);
-
-                while($row = mysqli_fetch_assoc($select_posts_id)){
-                    $post_id = $row['post_id'];
-                    $post_title = $row['post_title'];
-                }
-
                 echo "<tr>";
-                echo "<td>{$comment_id}</td>";
-                echo "<td>{$comment_author}</td>";
-                echo "<td>{$comment_email}</td>";
-                echo "<td><a href='../post.php?p_id={$comment_post_id}'>{$post_title}</a></td>";
-                echo "<td>{$comment_content}</td>";
-                echo "<td>{$comment_date}</td>";
-                echo "<td>{$comment_status}</td>";
-                echo "<td><a href='comments.php?approve={$comment_id}'>Approve</a></td>";
-                echo "<td><a href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
-                echo "<td><a href='comments.php?edit={$comment_id}'>Edit</a></td>";
-                echo "<td><a href='comments.php?delete={$comment_id}'>Delete</a></td>";
+                echo "<td>{$user_id}</td>";
+                echo "<td>{$user_name}</td>";
+                echo "<td>{$user_firstname}</td>";
+                echo "<td>{$user_lastname}</td>";
+                echo "<td>{$user_img}</td>";
+                echo "<td>{$user_email}</td>";
+                echo "<td>{$user_role}</td>";
+                echo "<td><a href='comments.php?edit={$user_id}'>Edit</a></td>";
+                echo "<td><a href='comments.php?delete={$user_id}'>Delete</a></td>";
                 echo "</tr>";
 
             }
