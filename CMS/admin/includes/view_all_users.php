@@ -4,12 +4,12 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Author</th>
-            <th>Email</th>
-            <th>Post</th>
-            <th>Comment</th>
-            <th>Date</th>
-            <th>Status</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>User Img</th>
+            <th>User Email</th>
+            <th>User Role</th>
             <th>Approve</th>
             <th>Unapprove</th>
             <th>Edit</th>
@@ -21,18 +21,18 @@
 
         <?php 
 
-            $query = "SELECT * FROM comments";
+            $query = "SELECT * FROM users";
             $select_comments = mysqli_query($connect, $query);
 
             while($row = mysqli_fetch_assoc($select_comments)){
 
-                $comment_id = $row['comment_id'];
-                $comment_author = $row['comment_author'];
-                $comment_email = $row['comment_email'];
-                $comment_post_id = $row['comment_post_id'];
-                $comment_content = $row['comment_content'];
-                $comment_date = $row['comment_date'];
-                $comment_status = $row['comment_status'];
+                $user_id = $row['user_id'];
+                $user_name = $row['user_name'];
+                $user_firstname = $row['user_firstname'];
+                $user_lastname = $row['user_lastname'];
+                $user_img = $row['user_img'];
+                $user_email = $row['user_email'];
+                $user_role = $row['user_role'];
 
                 $query =  "SELECT * FROM posts";
                 $query .= " WHERE post_id = {$comment_post_id}";
