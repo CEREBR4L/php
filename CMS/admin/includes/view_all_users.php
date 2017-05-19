@@ -40,8 +40,8 @@
                 echo "<td>{$user_img}</td>";
                 echo "<td>{$user_email}</td>";
                 echo "<td>{$user_role}</td>";
-                echo "<td><a href='comments.php?edit={$user_id}'>Edit</a></td>";
-                echo "<td><a href='comments.php?delete={$user_id}'>Delete</a></td>";
+                echo "<td><a href='users.php?edit={$user_id}'>Edit</a></td>";
+                echo "<td><a href='users.php?delete={$user_id}'>Delete</a></td>";
                 echo "</tr>";
 
             }
@@ -55,23 +55,9 @@
 
 <?php
     if(isset($_GET['delete'])){
-        $del_comment_id = $_GET['delete'];
-        $query = "DELETE FROM comments WHERE comment_id = {$del_comment_id}";
+        $del_user_id = $_GET['delete'];
+        $query = "DELETE FROM users WHERE user_id = {$del_user_id}";
         $delete_qry = mysqli_query($connect, $query);
-        header("Location: comments.php");
-    }
-
-    if(isset($_GET['approve'])){
-        $app_comment_id = $_GET['approve'];
-        $query = "UPDATE comments SET  comment_status = 'approved' WHERE comment_id = {$app_comment_id}";
-        $approve_qry = mysqli_query($connect, $query);
-        header("Location: comments.php");
-    }
-
-    if(isset($_GET['unapprove'])){
-        $upapp_comment_id = $_GET['unapprove'];
-        $query = "UPDATE comments SET  comment_status = 'unapproved' WHERE comment_id = {$upapp_comment_id}";
-        $unapprove_qry = mysqli_query($connect, $query);
-        header("Location: comments.php");
+        header("Location: users.php");
     }
 ?>
