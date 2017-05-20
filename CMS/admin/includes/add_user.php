@@ -1,10 +1,14 @@
 
 <?php 
     if(isset($_POST['create_post'])){
-        $post_title = $_POST['title'];
-        $post_author = $_POST['author'];
-        $post_category = $_POST['post_category'];
-        $post_status = $_POST['post_status'];
+
+        $user_id = $row['user_id'];
+        $user_name = $row['user_name'];
+        $user_firstname = $row['user_firstname'];
+        $user_lastname = $row['user_lastname'];
+        $user_img = $row['user_img'];
+        $user_email = $row['user_email'];
+        $user_role = $row['user_role'];
 
         $post_img = $_FILES['post_image']['name'];
         $post_img_temp = $_FILES['post_image']['tmp_name'];
@@ -33,55 +37,58 @@
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-        <label for="title">Post Title</label>
+        <label for="title">Username</label>
         <input type="text" class="form-control" name="title">    
     </div>
 
     <div class="form-group">
-        <label for="post_category">Post Category ID</label>
-        <br>
-        <select name="post_category" id="" class="form-control">
-            <?php 
-                $qry = "SELECT * FROM categories";
-                $select_categories = mysqli_query($connect, $qry);
-                confirm($select_categories);
-                while($row = mysqli_fetch_assoc($select_categories)){
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
+        <label for="post_tags">User Password</label>
+        <input type="password" class="form-control" name="post_tags">    
+    </div>
 
-                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
+    <div class="form-group">
+        <label for="user_role">User Role</label>
+        <br>
+        <select name="user_role" id="" class="form-control">
+            <?php 
+                $qry = "SELECT * FROM users";
+                $select_roles = mysqli_query($connect, $qry);
+                confirm($select_roles);
+
+                while($row = mysqli_fetch_assoc($select_roles)){
+                    $user_id = $row['user_id'];
+                    $user_role = $row['user_role'];
+
+                    echo "<option value='{$user_id}'>{$user_role}</option>";
                 }
             ?>
         </select>     
     </div>
 
     <div class="form-group">
-        <label for="author">Post Author</label>
+        <label for="author">Firstname</label>
         <input type="text" class="form-control" name="author">    
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
+        <label for="post_status">Lastname</label>
         <input type="text" class="form-control" name="post_status">    
     </div>
 
-    <div class="form-group">
-        <label for="post_image">Post Image</label>
+    <!--<div class="form-group">
+        <label for="post_image">User Image</label>
         <input type="file" name="post_image">    
-    </div>
+    </div>-->
 
     <div class="form-group">
-        <label for="post_tags">Post Tags</label>
-        <input type="text" class="form-control" name="post_tags">    
+        <label for="post_tags">User Email</label>
+        <input type="email" class="form-control" name="post_tags">    
     </div>
 
-    <div class="form-group">
-        <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" col="30" rows="10"></textarea>    
-    </div>
+    
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Submit Post">    
+        <input class="btn btn-primary" type="submit" name="create_user" value="Add User">    
     </div>
 
 </form>
