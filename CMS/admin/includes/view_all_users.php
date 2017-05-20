@@ -44,7 +44,7 @@
                 echo "<td>{$user_role}</td>";
                 echo "<td><a href='users.php?make_admin={$user_id}'>Make Admin</a></td>";
                 echo "<td><a href='users.php?make_subscriber={$user_id}'>Make Subscriber</a></td>";
-                echo "<td><a href='users.php?edit={$user_id}'>Edit</a></td>";
+                echo "<td><a href='users.php?source=edit_user&u_id={$user_id}'>Edit</a></td>";
                 echo "<td><a href='users.php?delete={$user_id}'>Delete</a></td>";
                 echo "</tr>";
 
