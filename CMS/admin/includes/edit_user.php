@@ -32,17 +32,17 @@
         //$user_img_temp = $_FILES['user_image']['tmp_name'];
         //move_uploaded_file($post_img_temp, "../images/$post_img");
 
-        $query = "INSERT INTO users( ";
-        $query .= "         user_name, user_password, user_firstname, user_lastname, "; 
-        $query .= "         user_email, user_role ";
-        $query .= "      ) ";
-        $query .= "VALUES( ";
-        $query .= "         '{$user_name}', '{$user_password}', '{$user_firstname}', "; 
-        $query .= "         '{$user_lastname}', '{$user_email}', '{$user_role}' "; 
-        $query .= "      ) ";
+        $query  = "UPDATE users SET ";
+        $query .= " user_name = '{$user_name}', "; 
+        $query .= " user_password = '{$user_password}', "; 
+        $query .= " user_firstname = '{$user_firstname}', "; 
+        $query .= " user_lastname = '{$user_lastname}', "; 
+        $query .= " user_email = '{$user_email}', "; 
+        $query .= " user_role = '{$user_role}' "; 
+        $query .= " WHERE user_id = {$u_id} ";
 
-        $create_user_query = mysqli_query($connect, $query);
-        confirm($create_user_query);
+        $update_user_query = mysqli_query($connect, $query);
+        confirm($update_user_query);
         header("Location: users.php");
     }
 ?>
