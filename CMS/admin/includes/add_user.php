@@ -1,23 +1,17 @@
 
 <?php 
-    if(isset($_POST['create_post'])){
+    if(isset($_POST['create_user'])){
 
-        $user_id = $row['user_id'];
-        $user_name = $row['user_name'];
-        $user_firstname = $row['user_firstname'];
-        $user_lastname = $row['user_lastname'];
-        $user_img = $row['user_img'];
-        $user_email = $row['user_email'];
-        $user_role = $row['user_role'];
+        $user_name = $_POST['user_name'];
+        $user_password = $_POST['user_password'];
+        $user_firstname = $_POST['user_firstname'];
+        $user_lastname = $_POST['user_lastname'];
+        $user_email = $_POST['user_email'];
+        $user_role = $_POST['user_role'];
 
-        $post_img = $_FILES['post_image']['name'];
-        $post_img_temp = $_FILES['post_image']['tmp_name'];
-
-        $post_tags = $_POST['post_tags'];
-        $post_content = $_POST['post_content'];
-        $post_date = date('d-m-y');
-
-        move_uploaded_file($post_img_temp, "../images/$post_img");
+        //$user_img = $_FILES['user_image']['name'];
+        //$user_img_temp = $_FILES['user_image']['tmp_name'];
+        //move_uploaded_file($post_img_temp, "../images/$post_img");
 
         $query = "INSERT INTO posts( ";
         $query .= "         post_category_id, post_title, post_author, post_date, post_image, "; 
@@ -37,55 +31,44 @@
 <form action="" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-        <label for="title">Username</label>
-        <input type="text" class="form-control" name="title">    
+        <label for="user_name">Username</label>
+        <input type="text" class="form-control" name="user_name">    
     </div>
 
     <div class="form-group">
-        <label for="post_tags">User Password</label>
-        <input type="password" class="form-control" name="post_tags">    
+        <label for="user_password">User Password</label>
+        <input type="password" class="form-control" name="user_password">    
+    </div>
+
+    <div class="form-group">
+        <label for="user_email">User Email</label>
+        <input type="email" class="form-control" name="user_email">    
     </div>
 
     <div class="form-group">
         <label for="user_role">User Role</label>
         <br>
         <select name="user_role" id="" class="form-control">
-            <?php 
-                $qry = "SELECT * FROM users";
-                $select_roles = mysqli_query($connect, $qry);
-                confirm($select_roles);
-
-                while($row = mysqli_fetch_assoc($select_roles)){
-                    $user_id = $row['user_id'];
-                    $user_role = $row['user_role'];
-
-                    echo "<option value='{$user_id}'>{$user_role}</option>";
-                }
-            ?>
+            <option value="admin">Select Role...</option>
+            <option value="admin">Admin</option>
+            <option value="admin">Subscriber</option>
         </select>     
     </div>
 
     <div class="form-group">
-        <label for="author">Firstname</label>
-        <input type="text" class="form-control" name="author">    
+        <label for="user_firstname">Firstname</label>
+        <input type="text" class="form-control" name="user_firstname">    
     </div>
 
     <div class="form-group">
-        <label for="post_status">Lastname</label>
-        <input type="text" class="form-control" name="post_status">    
+        <label for="user_lastname">Lastname</label>
+        <input type="text" class="form-control" name="user_lastname">    
     </div>
 
     <!--<div class="form-group">
         <label for="post_image">User Image</label>
         <input type="file" name="post_image">    
     </div>-->
-
-    <div class="form-group">
-        <label for="post_tags">User Email</label>
-        <input type="email" class="form-control" name="post_tags">    
-    </div>
-
-    
 
     <div class="form-group">
         <input class="btn btn-primary" type="submit" name="create_user" value="Add User">    

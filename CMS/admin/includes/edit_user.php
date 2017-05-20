@@ -65,21 +65,22 @@
     </div>
 
     <div class="form-group">
-        <label for="post_category">Post Category ID</label>
+        <label for="user_role">User Role</label>
         <br>
-        <select name="post_category" id="" class="form-control">
+        <select name="user_role" id="" class="form-control">
             <?php 
-                $qry = "SELECT * FROM categories";
-                $select_categories = mysqli_query($connect, $qry);
-                confirm($select_categories);
-                while($row = mysqli_fetch_assoc($select_categories)){
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
+                $qry = "SELECT * FROM users";
+                $select_roles = mysqli_query($connect, $qry);
+                confirm($select_roles);
 
-                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                while($row = mysqli_fetch_assoc($select_roles)){
+                    $user_id = $row['user_id'];
+                    $user_role = $row['user_role'];
+
+                    echo "<option value='{$user_id}'>{$user_role}</option>";
                 }
             ?>
-        </select>    
+        </select>     
     </div>
 
     <div class="form-group">
