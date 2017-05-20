@@ -2,6 +2,21 @@
 <?php
     if(isset($_GET['u_id'])){
         $u_id = $_GET['u_id'];
+
+        $qry_user = "SELECT * FROM users WHERE user_id = {$u_id}";
+        $get_user_query = mysqli_query($connect, $qry_user);
+
+        while($row = mysqli_fetch_assoc($get_user_query)){
+
+                $user_id = $row['user_id'];
+                $user_name = $row['user_name'];
+                $user_firstname = $row['user_firstname'];
+                $user_lastname = $row['user_password'];
+                $user_password = $row['user_role'];
+                $user_img = $row['user_img'];
+                $user_email = $row['user_email'];
+                $user_role = $row['user_role'];
+        }
     }
 
     if(isset($_POST['update_user'])){
@@ -36,17 +51,17 @@
 
     <div class="form-group">
         <label for="user_name">Username</label>
-        <input type="text" class="form-control" name="user_name">    
+        <input type="text" class="form-control" name="user_name" value="<?php echo $user_name; ?>">    
     </div>
 
     <div class="form-group">
         <label for="user_password">User Password</label>
-        <input type="password" class="form-control" name="user_password">    
+        <input type="password" class="form-control" name="user_password" value="<?php echo $user_password; ?>">    
     </div>
 
     <div class="form-group">
         <label for="user_email">User Email</label>
-        <input type="email" class="form-control" name="user_email">    
+        <input type="email" class="form-control" name="user_email" value="<?php echo $user_email; ?>">    
     </div>
 
     <div class="form-group">
@@ -61,12 +76,12 @@
 
     <div class="form-group">
         <label for="user_firstname">Firstname</label>
-        <input type="text" class="form-control" name="user_firstname">    
+        <input type="text" class="form-control" name="user_firstname" value="<?php echo $user_firstname; ?>">    
     </div>
 
     <div class="form-group">
         <label for="user_lastname">Lastname</label>
-        <input type="text" class="form-control" name="user_lastname">    
+        <input type="text" class="form-control" name="user_lastname" value="<?php echo $user_lastname; ?>">    
     </div>
 
     <!--<div class="form-group">
