@@ -56,6 +56,7 @@
 <?php
     if(isset($_GET['delete'])){
         $del_user_id = $_GET['delete'];
+        
         $query = "DELETE FROM users WHERE user_id = {$del_user_id}";
         $delete_qry = mysqli_query($connect, $query);
         header("Location: users.php");
