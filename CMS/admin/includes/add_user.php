@@ -13,18 +13,18 @@
         //$user_img_temp = $_FILES['user_image']['tmp_name'];
         //move_uploaded_file($post_img_temp, "../images/$post_img");
 
-        $query = "INSERT INTO posts( ";
-        $query .= "         post_category_id, post_title, post_author, post_date, post_image, "; 
-        $query .= "         post_content, post_tags, post_status ";
+        $query = "INSERT INTO users( ";
+        $query .= "         user_name, user_password, user_firstname, user_lastname, "; 
+        $query .= "         user_email, user_role ";
         $query .= "      ) ";
         $query .= "VALUES( ";
-        $query .= "         {$post_category}, '{$post_title}', '{$post_author}', now(), "; 
-        $query .= "        '{$post_img}', '{$post_content}', '{$post_tags}', "; 
-        $query .= "        '{$post_status}' ";
+        $query .= "         '{$user_name}', '{$user_password}', '{$user_firstname}', "; 
+        $query .= "         '{$user_lastname}', '{$user_email}', '{$user_role}' "; 
         $query .= "      ) ";
 
-        $create_post_query = mysqli_query($connect, $query);
-        confirm($create_post_query);
+        $create_user_query = mysqli_query($connect, $query);
+        confirm($create_user_query);
+        header("Location: users.php");
     }
 ?>
 
@@ -49,9 +49,9 @@
         <label for="user_role">User Role</label>
         <br>
         <select name="user_role" id="" class="form-control">
-            <option value="admin">Select Role...</option>
+            <option value="">Select Role...</option>
             <option value="admin">Admin</option>
-            <option value="admin">Subscriber</option>
+            <option value="subscriber">Subscriber</option>
         </select>     
     </div>
 
