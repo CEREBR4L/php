@@ -68,9 +68,15 @@
         <label for="user_role">User Role</label>
         <br>
         <select name="user_role" id="" class="form-control">
-            <option value="">Select Role...</option>
-            <option value="admin">Admin</option>
-            <option value="subscriber">Subscriber</option>
+            <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
+            <?php 
+                if($user_role == 'admin'){
+                    echo "<option value='subscriber'>Subscriber</option>";
+                }
+                else{
+                    echo "<option value='admin'>Admin</option>";
+                }
+            ?>
         </select>     
     </div>
 
