@@ -4,6 +4,13 @@
     include "functions.php";
     ob_start();
     session_start();
+
+    if(isset($_SESSION['user_role'])){
+        if($_SESSION['user_role'] !== 'admin'){
+            header("Location: ../index.php");
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
