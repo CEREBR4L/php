@@ -12,11 +12,34 @@
             $user_id = $row['user_id'];
             $user_name = $row['user_name'];
             $user_firstname = $row['user_firstname'];
-            $user_lastname = $row['user_password'];
-            $user_password = $row['user_role'];
+            $user_lastname = $row['user_lastname'];
+            $user_password = $row['user_password'];
             $user_email = $row['user_email'];
             $user_role = $row['user_role'];
         }
+    }
+
+
+    if(isset($_POST['update_user'])){
+        $user_name = $_POST['user_name'];
+        $user_password = $_POST['user_password'];
+        $user_firstname = $_POST['user_firstname'];
+        $user_lastname = $_POST['user_lastname'];
+        $user_email = $_POST['user_email'];
+        $user_role = $_POST['user_role'];
+
+        $query  = "UPDATE users SET ";
+        $query .= " user_name = '{$user_name}', "; 
+        $query .= " user_password = '{$user_password}', "; 
+        $query .= " user_firstname = '{$user_firstname}', "; 
+        $query .= " user_lastname = '{$user_lastname}', "; 
+        $query .= " user_email = '{$user_email}', "; 
+        $query .= " user_role = '{$user_role}' "; 
+        $query .= " WHERE user_id = {$user_id} ";
+
+        $update_user_query = mysqli_query($connect, $query);
+        confirm($update_user_query);
+        header("Location: profile.php");
     }
 
 ?>
@@ -33,32 +56,6 @@
                             Profile
                             <small>Manage your profile</small>
                         </h1>
-
-                        
-                        <?php
-                            if(isset($_POST['update_user'])){
-
-                                $user_name = $_POST['user_name'];
-                                $user_password = $_POST['user_password'];
-                                $user_firstname = $_POST['user_firstname'];
-                                $user_lastname = $_POST['user_lastname'];
-                                $user_email = $_POST['user_email'];
-                                $user_role = $_POST['user_role'];
-
-                                $query  = "UPDATE users SET ";
-                                $query .= " user_name = '{$user_name}', "; 
-                                $query .= " user_password = '{$user_password}', "; 
-                                $query .= " user_firstname = '{$user_firstname}', "; 
-                                $query .= " user_lastname = '{$user_lastname}', "; 
-                                $query .= " user_email = '{$user_email}', "; 
-                                $query .= " user_role = '{$user_role}' "; 
-                                $query .= " WHERE user_id = {$u_id} ";
-
-                                $update_user_query = mysqli_query($connect, $query);
-                                confirm($update_user_query);
-                                header("Location: users.php");
-                            }
-                        ?>
 
                         <form action="" method="post" enctype="multipart/form-data">
 
