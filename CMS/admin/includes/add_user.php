@@ -24,7 +24,8 @@
 
         $create_user_query = mysqli_query($connect, $query);
         confirm($create_user_query);
-        header("Location: users.php");
+        echo "<div class='alert alert-success'><strong>User created successfully</strong> <a href='users.php'>Return to view all users.</a></div>";
+        //header("Location: users.php");
     }
 ?>
 
