@@ -1,4 +1,11 @@
-       
+
+<?php
+
+    $qry = "SELECT * FROM posts";
+    $select_posts = mysqli_query($connect, $qry);
+    $post_count = mysqli_num_rows($select_posts);
+?>
+
 <!-- /.row -->
                 
 <div class="row">
@@ -10,7 +17,7 @@
                         <i class="fa fa-file-text fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                  <div class='huge'>12</div>
+                  <div class='huge'><?php echo $post_count; ?></div>
                         <div>Posts</div>
                     </div>
                 </div>
