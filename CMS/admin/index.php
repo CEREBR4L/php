@@ -26,12 +26,14 @@
                                 function drawChart() {
                                     var data = google.visualization.arrayToDataTable([
                                     ['Data', 'Count'],
-
                                     <?php 
-                                        
-                                    ?>
+                                        $element_text = ["Posts", "Comments", "Users", "Categories"];
+                                        $element_values = [$post_count, $comment_count, $user_count, $categories_count];
 
-                                    ['Posts', 1000],
+                                        for($i = 0; $i < 4; $i++){
+                                            echo "['{$element_text[$i]}', {$element_values[$i]}],";
+                                        }
+                                    ?>
                                     ]);
 
                                     var options = {
