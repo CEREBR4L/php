@@ -4,6 +4,18 @@
     $qry = "SELECT * FROM posts";
     $select_posts = mysqli_query($connect, $qry);
     $post_count = mysqli_num_rows($select_posts);
+
+    $qry = "SELECT * FROM comments";
+    $select_comments = mysqli_query($connect, $qry);
+    $comment_count = mysqli_num_rows($select_comments);
+
+    $qry = "SELECT * FROM users";
+    $select_users = mysqli_query($connect, $qry);
+    $user_count = mysqli_num_rows($select_users);
+
+    $qry = "SELECT * FROM categories";
+    $select_categories = mysqli_query($connect, $qry);
+    $categories_count = mysqli_num_rows($select_categories);
 ?>
 
 <!-- /.row -->
@@ -39,7 +51,7 @@
                         <i class="fa fa-comments fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                     <div class='huge'>23</div>
+                     <div class='huge'><?php echo $comment_count; ?></div>
                       <div>Comments</div>
                     </div>
                 </div>
@@ -61,7 +73,7 @@
                         <i class="fa fa-user fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                    <div class='huge'>23</div>
+                    <div class='huge'><?php echo $user_count; ?></div>
                         <div> Users</div>
                     </div>
                 </div>
@@ -83,7 +95,7 @@
                         <i class="fa fa-list fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class='huge'>13</div>
+                        <div class='huge'><?php echo $categories_count; ?></div>
                          <div>Categories</div>
                     </div>
                 </div>
