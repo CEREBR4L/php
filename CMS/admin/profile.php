@@ -3,7 +3,20 @@
 <?php 
 
     if(isset($_SESSION['username'])){
-        
+       $username = $_SESSION['username'];
+       $qry_get_user = "SELECT * FROM users WHERE user_name = '{$username}'";
+       $get_user_query = mysqli_query($connect, $qry_get_user);
+
+       while($row = mysqli_fetch_array($get_user_query)){
+
+            $user_id = $row['user_id'];
+            $user_name = $row['user_name'];
+            $user_firstname = $row['user_firstname'];
+            $user_lastname = $row['user_password'];
+            $user_password = $row['user_role'];
+            $user_email = $row['user_email'];
+            $user_role = $row['user_role'];
+        }
     }
 
 ?>
@@ -23,25 +36,6 @@
 
                         
                         <?php
-                            if(isset($_GET['u_id'])){
-                                $u_id = $_GET['u_id'];
-
-                                $qry_user = "SELECT * FROM users WHERE user_id = {$u_id}";
-                                $get_user_query = mysqli_query($connect, $qry_user);
-
-                                while($row = mysqli_fetch_assoc($get_user_query)){
-
-                                        $user_id = $row['user_id'];
-                                        $user_name = $row['user_name'];
-                                        $user_firstname = $row['user_firstname'];
-                                        $user_lastname = $row['user_password'];
-                                        $user_password = $row['user_role'];
-                                        $user_img = $row['user_img'];
-                                        $user_email = $row['user_email'];
-                                        $user_role = $row['user_role'];
-                                }
-                            }
-
                             if(isset($_POST['update_user'])){
 
                                 $user_name = $_POST['user_name'];
@@ -50,10 +44,6 @@
                                 $user_lastname = $_POST['user_lastname'];
                                 $user_email = $_POST['user_email'];
                                 $user_role = $_POST['user_role'];
-
-                                //$user_img = $_FILES['user_image']['name'];
-                                //$user_img_temp = $_FILES['user_image']['tmp_name'];
-                                //move_uploaded_file($post_img_temp, "../images/$post_img");
 
                                 $query  = "UPDATE users SET ";
                                 $query .= " user_name = '{$user_name}', "; 
