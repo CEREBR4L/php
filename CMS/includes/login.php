@@ -18,7 +18,22 @@
         }
 
         while($row = mysqli_fetch_array($find_user)){
-            echo $user_id = $row['user_id'];
+            $user_id = $row['user_id'];
+            $user_name = $row['user_name'];
+            $user_password = $row['user_password'];
+            $user_firstname = $row['user_firstname'];
+            $user_lastname = $row['user_lastname'];
+            $user_role = $row['user_role'];
+        }
+
+        if($username !== $user_name && $password !== $user_password){
+            header("Location: ../index.php");
+        }
+        else if($username == $user_name && $password == $user_password){
+            header("Location: ../admin/");
+        }
+        else{
+            header("Location: ../index.php");
         }
 
     }
