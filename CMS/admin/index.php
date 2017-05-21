@@ -15,6 +15,8 @@
                             Welcome to Admin
                             <small><?php echo $_SESSION['username']; ?></small>
                         </h1>
+
+                        <?php include "includes/admin_widgets.php" ?>
         
                     </div>
                 </div>
