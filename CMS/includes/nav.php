@@ -15,7 +15,7 @@
             <ul class="nav navbar-nav">
 
                 <?php 
-
+                    session_start();
                     $query = "SELECT * FROM categories";
                     $select_all_categories_query = mysqli_query($connect, $query);
 
@@ -30,7 +30,14 @@
                 ?>
 
                 <li><a href='admin'>Admin</a></li>
-
+                <?php
+                    if(isset($_SESSION['user_id'])){
+                        if(isset($_GET['p_id'])){
+                            $post_id = $_GET['p_id'];
+                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$post_id}'>Edit Post</a></li>";
+                        }
+                    }
+                ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
