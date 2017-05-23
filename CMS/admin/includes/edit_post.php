@@ -53,6 +53,8 @@
         
         $update_post_query = mysqli_query($connect, $query);
         confirm($update_post_query);
+        echo "<div class='alert alert-success'><strong>Post Updated Successfully.</strong> <a href='posts.php'>Return to view all posts?</a></div>";
+        
 
     }
 ?>

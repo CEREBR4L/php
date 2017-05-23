@@ -27,6 +27,7 @@
 
         $create_post_query = mysqli_query($connect, $query);
         confirm($create_post_query);
+        echo "<div class='alert alert-success'><strong>Post Created Successfully.</strong> <a href='posts.php'>View all post?</a></div>";
     }
 ?>
 

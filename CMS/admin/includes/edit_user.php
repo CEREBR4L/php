@@ -43,7 +43,7 @@
 
         $update_user_query = mysqli_query($connect, $query);
         confirm($update_user_query);
-        header("Location: users.php");
+        echo "<div class='alert alert-success'><strong>Users Updated Successfully.</strong> <a href='users.php'>Return to view all users?</a></div>";
     }
 ?>
 
