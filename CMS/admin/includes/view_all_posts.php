@@ -20,6 +20,7 @@
 
         <thead>
             <tr>
+                <th>Select</th>
                 <th>ID</th>
                 <th>Author</th>
                 <th>Title</th>
@@ -64,6 +65,7 @@
                     }
 
                     echo "<tr>";
+                    echo "<td><input id='select_post_boxes' type='checkbox' name='checkBoxArray[]' value='{$post_id}'></td>";
                     echo "<td>{$post_id}</td>";
                     echo "<td>{$post_author}</td>";
                     echo "<td>{$post_title}</td>";
