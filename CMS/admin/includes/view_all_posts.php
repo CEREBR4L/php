@@ -2,21 +2,37 @@
 <?php 
 
     if(isset($_POST['checkBoxArray'])){
-        $options = $_POST['bulkOption'];
-        foreach($_POST['checkBoxArray'] as $post_id){
+        foreach($_POST['checkBoxArray'] as $post_id_update){
+            $options = $_POST['bulkOption'];
+            switch($options){
+                case 'publish':
+                    $qry = "UPDATE posts SET post_status = 'published' WHERE post_id = {$post_id_update}";
+                    $update_posts_bulk_publish = mysqli_query($connect, $qry);
+                    break;
+                case 'draft':
+                    $qry = "UPDATE posts SET post_status = 'draft' WHERE post_id = {$post_id_update}";
+                    $update_posts_bulk_draft = mysqli_query($connect, $qry);
+                    break;
+                case 'delete':
+                    $qry = "DELETE FROM posts WHERE post_id = {$post_id_update}";
+                    $delete_posts_bulk = mysqli_query($connect, $qry);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
 ?>
 
 <form action="" method="post">
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px">
         <div id="bulkOptionsContainer" class="col-xs-4">
             <select class="form-control" name="bulkOption" id="">
                 <option value="">Select Options...</option>
-                <option value="">Publish</option>
-                <option value="">Draft</option>
-                <option value="">Delete</option>
+                <option value="publish">Publish</option>
+                <option value="draft">Draft</option>
+                <option value="delete">Delete</option>
             </select>
         </div>
 
