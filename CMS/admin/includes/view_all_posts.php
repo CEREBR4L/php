@@ -48,8 +48,8 @@
             <tr>
                 <th><input id='selectAllBoxes' type='checkbox'></th>
                 <th>ID</th>
-                <th>Author</th>
                 <th>Title</th>
+                <th>Author</th>
                 <th>Category</th>
                 <th>Status</th>
                 <th>Image</th>
@@ -93,8 +93,8 @@
                     echo "<tr>";
                     echo "<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='{$post_id}'></td>";
                     echo "<td>{$post_id}</td>";
+                    echo "<td><a href='../post.php?p_id={$post_id}'>{$post_title}</a></td>";
                     echo "<td>{$post_author}</td>";
-                    echo "<td>{$post_title}</td>";
                     echo "<td>{$cat_title}</td>";
                     echo "<td>{$post_status}</td>";
                     echo "<td><img src='../images/{$post_image}' width='100' ></td>";
