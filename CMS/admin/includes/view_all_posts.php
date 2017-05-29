@@ -132,7 +132,7 @@
                     echo "<td>{$post_tags}</td>";
                     echo "<td>{$post_comment_count}</td>";
                     echo "<td>{$post_date}</td>";
-                    echo "<td>{$post_views}</td>";
+                    echo "<td><a href='posts.php?reset={$post_id}'>{$post_views}</a></td>";
                     echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
                     echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
                     echo "</tr>";
@@ -153,6 +153,13 @@
         $del_post_id = $_GET['delete'];
         $query = "DELETE FROM posts WHERE post_id = {$del_post_id}";
         $delete_qry = mysqli_query($connect, $query);
+        header("Location: posts.php");
+    }
+
+    if(isset($_GET['reset'])){
+        $reset_views = $_GET['reset'];
+        $query = "UPDATE posts SET post_views = 0 WHERE post_id = {$reset_views}";
+        $reset_qry = mysqli_query($connect, $query);
         header("Location: posts.php");
     }
 ?>
