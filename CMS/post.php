@@ -20,6 +20,12 @@
                     if(isset($_GET['p_id'])){
                         $p_id = $_GET['p_id'];
                     }
+                    else{
+                        header("Location: index.php");
+                    }
+
+                    $add_view = "UPDATE posts SET post_views = post_views + 1 WHERE post_id = {$p_id}";
+                    $update_view = mysqli_query($connect, $add_view);
 
                     $query = "SELECT * FROM posts WHERE post_id = {$p_id}";
                     $select_all_posts_query = mysqli_query($connect, $query);
