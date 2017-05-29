@@ -7,14 +7,14 @@
     
         if(isset($_POST['submit'])){
 
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $email    = $_POST['email'];
+
             if(empty($username) || empty($password) || empty($email)){
                 $msg = "<div class='alert alert-danger'><strong>Please fill in all the fields.</strong></div>";
             }
             else{
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $email    = $_POST['email'];
-
                 $username = mysqli_real_escape_string($connect, $username);
                 $password = mysqli_real_escape_string($connect, $password);
                 $email    = mysqli_real_escape_string($connect, $email);
@@ -28,6 +28,7 @@
 
                 while($row = mysqli_fetch_array($get_salt)){
                     $salt = $row['user_randSalt'];
+                    $password = crypt($password, $salt);
 
                     $qry  = "INSERT INTO users(user_name, user_email, user_password, user_role) ";
                     $qry .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber')";
