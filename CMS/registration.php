@@ -1,6 +1,19 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
 
+    <?php 
+    
+        if(isset($_POST['submit'])){
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $email    = $_POST['email'];
+
+            $username = mysqli_real_escape_string($connect, $username);
+            $password = mysqli_real_escape_string($connect, $password);
+            $email    = mysqli_real_escape_string($connect, $email);
+        }
+    
+    ?>
 
     <!-- Navigation -->
     
