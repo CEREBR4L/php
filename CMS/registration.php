@@ -19,7 +19,6 @@
                 $password = mysqli_real_escape_string($connect, $password);
                 $email    = mysqli_real_escape_string($connect, $email);
 
-
                 $qry = "SELECT user_randSalt FROM users";
                 $get_salt = mysqli_query($connect, $qry);
                 if(!$get_salt){
@@ -36,9 +35,10 @@
                     if(!$reg_user){
                         die("Failed to register user: " . mysqli_error($connect) . ' ' . mysqli_errno($connect));
                     }
+                    else{
+                        $msg = "<div class='alert alert-success'><strong>User registered!</strong></div>";
+                    }
                 }
-
-                $msg = "<div class='alert alert-success'><strong>User registered!</strong></div>";
             }
 
         }

@@ -25,7 +25,10 @@
             $user_firstname = $row['user_firstname'];
             $user_lastname = $row['user_lastname'];
             $user_role = $row['user_role'];
+            $user_randSalt = $row['user_randSalt'];
         }
+
+        $password = crypt($password, $user_password);
 
         if($username === $user_name && $password === $user_password){
             $_SESSION['user_id'] = $user_id;
