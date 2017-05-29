@@ -8,14 +8,14 @@
 
         while($row = mysqli_fetch_assoc($get_user_query)){
 
-                $user_id = $row['user_id'];
-                $user_name = $row['user_name'];
-                $user_firstname = $row['user_firstname'];
-                $user_lastname = $row['user_password'];
-                $user_password = $row['user_role'];
-                $user_img = $row['user_img'];
-                $user_email = $row['user_email'];
-                $user_role = $row['user_role'];
+            $user_id = $row['user_id'];
+            $user_name = $row['user_name'];
+            $user_firstname = $row['user_firstname'];
+            $user_lastname = $row['user_lastname'];
+            $user_password = $row['user_password'];
+            $user_img = $row['user_img'];
+            $user_email = $row['user_email'];
+            $user_role = $row['user_role'];
         }
     }
 
@@ -32,9 +32,20 @@
         //$user_img_temp = $_FILES['user_image']['tmp_name'];
         //move_uploaded_file($post_img_temp, "../images/$post_img");
 
+        $qry = "SELECT user_randSalt FROM users";
+        $get_salt = mysqli_query($connect, $qry);
+
+        if(!$get_salt){
+            die("Query failed to get salt: " . mysqli_error($connect));
+        }
+
+        $row = mysqli_fetch_array($get_salt);
+        $salt = $row['user_randSalt'];
+        $crypt_password = crypt($user_password, $salt);
+
         $query  = "UPDATE users SET ";
         $query .= " user_name = '{$user_name}', "; 
-        $query .= " user_password = '{$user_password}', "; 
+        $query .= " user_password = '{$crypt_password}', "; 
         $query .= " user_firstname = '{$user_firstname}', "; 
         $query .= " user_lastname = '{$user_lastname}', "; 
         $query .= " user_email = '{$user_email}', "; 
