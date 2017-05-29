@@ -2,24 +2,42 @@
  <?php  include "includes/header.php"; ?>
 
     <?php 
+
+        $msg = "";
     
         if(isset($_POST['submit'])){
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $email    = $_POST['email'];
 
-            $username = mysqli_real_escape_string($connect, $username);
-            $password = mysqli_real_escape_string($connect, $password);
-            $email    = mysqli_real_escape_string($connect, $email);
-
-            $qry = "SELECT user_randSalt FROM users";
-            $get_salt = mysqli_query($connect, $qry);
-            if(!$get_salt){
-                die("Query failed to get salt: " . mysqli_error($connect));
+            if(empty($username) || empty($password) || empty($email)){
+                $msg = "<div class='alert alert-danger'><strong>Please fill in all the fields.</strong></div>";
             }
+            else{
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $email    = $_POST['email'];
 
-            while($row = mysqli_fetch_array($get_salt)){
-                echo $salt = $row['user_randSalt'];
+                $username = mysqli_real_escape_string($connect, $username);
+                $password = mysqli_real_escape_string($connect, $password);
+                $email    = mysqli_real_escape_string($connect, $email);
+
+
+                $qry = "SELECT user_randSalt FROM users";
+                $get_salt = mysqli_query($connect, $qry);
+                if(!$get_salt){
+                    die("Query failed to get salt: " . mysqli_error($connect));
+                }
+
+                while($row = mysqli_fetch_array($get_salt)){
+                    $salt = $row['user_randSalt'];
+
+                    $qry  = "INSERT INTO users(user_name, user_email, user_password, user_role) ";
+                    $qry .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber')";
+                    $reg_user = mysqli_query($connect, $qry);
+                    if(!$reg_user){
+                        die("Failed to register user: " . mysqli_error($connect) . ' ' . mysqli_errno($connect));
+                    }
+                }
+
+                $msg = "<div class='alert alert-success'><strong>User registered!</strong></div>";
             }
 
         }
@@ -40,6 +58,7 @@
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
                 <h1>Register</h1>
+                    <?php echo $msg; ?>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
