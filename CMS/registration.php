@@ -17,6 +17,11 @@
             if(!$get_salt){
                 die("Query failed to get salt: " . mysqli_error($connect));
             }
+
+            while($row = mysqli_fetch_array($get_salt)){
+                echo $salt = $row['user_randSalt'];
+            }
+
         }
     
     ?>
