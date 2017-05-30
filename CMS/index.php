@@ -17,13 +17,23 @@
                 <!-- First Blog Post -->
                 <?php 
 
+                    if(isset($_GET['page'])){
+                        $page = $_GET['page'];
+                        $var = ($page * 5) - 5;
+                    }
+                    else{
+                        $page = "";
+                    }
+
+                    if($page == "" || $page == 1){
+                        $var = 0;
+                    }
+
                     $qry_count = "SELECT * FROM posts WHERE post_status = 'published'";
                     $select_post_count = mysqli_query($connect, $qry_count);
-                    $count = mysqli_num_rows($select_post_count);
-
-                    $count = ceil($count / 5);
+                    $count = ceil(mysqli_num_rows($select_post_count) / 5);
                     
-                    $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                    $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT {$var}, 5";
                     $select_all_posts_query = mysqli_query($connect, $query);
                     if(mysqli_num_rows($select_all_posts_query) == 0){
                         echo "<h1>No Posts here!</h1>";
