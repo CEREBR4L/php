@@ -20,6 +20,8 @@
                     $qry_count = "SELECT * FROM posts WHERE post_status = 'published'";
                     $select_post_count = mysqli_query($connect, $qry_count);
                     $count = mysqli_num_rows($select_post_count);
+
+                    $count = ceil($count / 5);
                     
                     $query = "SELECT * FROM posts WHERE post_status = 'published'";
                     $select_all_posts_query = mysqli_query($connect, $query);
@@ -68,6 +70,14 @@
 
         </div>
         <!-- /.row -->
+
+        <ul class="pager">
+            <?php
+                for($i = 1; $i <= $count; $i++){
+                    echo "<li style='margin: 0 5px;'><a href='index.php?page={$i}'>{$i}</a></li>";
+                }
+            ?>
+        </ul>
 
         <hr>
 
