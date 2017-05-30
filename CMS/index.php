@@ -16,13 +16,10 @@
 
                 <!-- First Blog Post -->
                 <?php 
-
+                    $page = "";
                     if(isset($_GET['page'])){
                         $page = $_GET['page'];
                         $var = ($page * 5) - 5;
-                    }
-                    else{
-                        $page = "";
                     }
 
                     if($page == "" || $page == 1){
@@ -84,7 +81,12 @@
         <ul class="pager">
             <?php
                 for($i = 1; $i <= $count; $i++){
-                    echo "<li style='margin: 0 5px;'><a href='index.php?page={$i}'>{$i}</a></li>";
+                    if($i == $page){
+                        echo "<li style='margin: 0 5px;'><a href='index.php?page={$i}' style='background-color: #ddd;'>{$i}</a></li>";
+                    }
+                    else{
+                        echo "<li style='margin: 0 5px;'><a href='index.php?page={$i}'>{$i}</a></li>";
+                    }
                 }
             ?>
         </ul>
