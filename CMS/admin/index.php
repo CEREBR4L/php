@@ -2,6 +2,30 @@
 
     <div id="wrapper">
 
+        <?php
+            $session = session_id();
+            $time = time();
+            $timeout_in_seconds = 60;
+            $timeout = $time - $timeout_in_seconds;
+
+            $qry = "SELECT * FROM users_online WHERE session = '{$session}'";
+            $get_online_users = mysqli_query($connect, $qry);
+            $online_count = mysqli_num_rows($get_online_users);
+
+            if($online_count == NULL){
+                mysqli_query($connect, "INSERT INTO users_online(session, time) VALUES ('{$session}', '{$time}')");
+            } 
+            else{
+                mysqli_query($connect, "UPDATE users_online SET time = '{$time}' WHERE session = '{$session}')"); 
+            }
+
+            $users_online_session = mysqli_query($connect, "SELECT * FROM users_online WHERE time > '{$timeout}')");
+            $online_count_user = 0;
+            if($users_online_session){
+                $online_count_user = mysqli_num_rows($users_online_session);
+            }
+        ?>
+
         <?php include "includes/admin_nav.php";  ?>
 
         <div id="page-wrapper">
@@ -14,6 +38,7 @@
                         <h1 class="page-header">
                             Welcome to Admin
                             <small><?php echo $_SESSION['username']; ?></small>
+                            <?php echo $online_count_user; ?>
                         </h1>
 
                         <?php include "includes/admin_widgets.php" ?>
