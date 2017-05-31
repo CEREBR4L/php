@@ -98,7 +98,9 @@
 
             <?php 
 
-                $query = "SELECT * FROM posts ORDER BY post_id DESC";
+                $query  = "SELECT * FROM posts ";
+                $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id ";
+                $query .= "ORDER BY posts.post_id DESC ";
                 $select_posts = mysqli_query($connect, $query);
 
                 while($row = mysqli_fetch_assoc($select_posts)){
@@ -114,21 +116,13 @@
                     $post_comment_count = $row['post_comment_count'];
                     $post_date = $row['post_date'];
                     $post_views = $row['post_views'];
-
-                    $query =  "SELECT * FROM categories";
-                    $query .= " WHERE cat_id = {$post_category_id}";
-
-                    $select_categories_id = mysqli_query($connect, $query);
-
-                    while($row = mysqli_fetch_assoc($select_categories_id)){
-                        $cat_id = $row['cat_id'];
-                        $cat_title = $row['cat_title'];
-                    }
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
 
                     $qry = "SELECT * FROM comments WHERE comment_post_id = $post_id";
                     $get_comment = mysqli_query($connect, $qry);
                     $comments = mysqli_fetch_array($get_comment);
-                    $comment_id = $row['comment_id'];
+                    $comment_id = $comments['comment_id'];
                     $count_comments = mysqli_num_rows($get_comment);
 
                     if($post_author == NULL){
