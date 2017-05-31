@@ -22,7 +22,7 @@
                         $author = $_GET['author'];
                     }
 
-                    $query = "SELECT * FROM posts WHERE post_author = '{$author}'";
+                    $query = "SELECT * FROM posts WHERE post_user = '{$author}'";
                     $select_all_posts_query = mysqli_query($connect, $query);
 
                     echo "<h1>All posts by {$author}!</h1>";

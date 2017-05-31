@@ -102,6 +102,7 @@
 
                     $post_id = $row['post_id'];
                     $post_author = $row['post_author'];
+                    $post_user = $row['post_user'];
                     $post_title = $row['post_title'];
                     $post_category_id = $row['post_category_id'];
                     $post_status = $row['post_status'];
@@ -121,6 +122,19 @@
                         $cat_title = $row['cat_title'];
                     }
 
+                    $qry = "SELECT * FROM comments WHERE comment_post_id = $post_id";
+                    $get_comment = mysqli_query($connect, $qry);
+                    $comments = mysqli_fetch_array($get_comment);
+                    $comment_id = $row['comment_id'];
+                    $count_comments = mysqli_num_rows($get_comment);
+
+                    if($post_author == NULL){
+                        $qry_author = "SELECT * FROM users WHERE user_id = {$post_user}";
+                        $get_user = mysqli_query($connect, $qry_author);
+                        $row = mysqli_fetch_assoc($get_user);
+                        $post_author = $row['user_name'];
+                    }
+
                     echo "<tr>";
                     echo "<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='{$post_id}'></td>";
                     echo "<td>{$post_id}</td>";
@@ -130,7 +144,7 @@
                     echo "<td>{$post_status}</td>";
                     echo "<td><img src='../images/{$post_image}' width='100' ></td>";
                     echo "<td>{$post_tags}</td>";
-                    echo "<td>{$post_comment_count}</td>";
+                    echo "<td><a href='post_comments.php?id=$post_id'>{$count_comments}</a></td>";
                     echo "<td>{$post_date}</td>";
                     echo "<td><a href='posts.php?reset={$post_id}'>{$post_views}</a></td>";
                     echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";

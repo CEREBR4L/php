@@ -2,7 +2,7 @@
 <?php 
     if(isset($_POST['create_post'])){
         $post_title = $_POST['title'];
-        $post_author = $_POST['author'];
+        $post_author = $_POST['post_user'];
         $post_category = $_POST['post_category'];
         $post_status = $_POST['post_status'];
 
@@ -16,7 +16,7 @@
         move_uploaded_file($post_img_temp, "../images/$post_img");
 
         $query = "INSERT INTO posts( ";
-        $query .= "         post_category_id, post_title, post_author, post_date, post_image, "; 
+        $query .= "         post_category_id, post_title, post_user, post_date, post_image, "; 
         $query .= "         post_content, post_tags, post_status ";
         $query .= "      ) ";
         $query .= "VALUES( ";
@@ -57,8 +57,21 @@
     </div>
 
     <div class="form-group">
-        <label for="author">Post Author</label>
-        <input type="text" class="form-control" name="author">    
+        <label for="post_user">Post Author</label>
+        <br>
+        <select name="post_user" id="" class="form-control">
+            <?php 
+                $qry = "SELECT * FROM users";
+                $select_users = mysqli_query($connect, $qry);
+                confirm($select_users);
+                while($row = mysqli_fetch_assoc($select_users)){
+                    $user_id = $row['user_id'];
+                    $user_name = $row['user_name'];
+
+                    echo "<option value='{$user_id}'>{$user_name}</option>";
+                }
+            ?>
+        </select>      
     </div>
 
     <div class="form-group">

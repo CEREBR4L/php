@@ -33,7 +33,7 @@
                     while($row = mysqli_fetch_assoc($select_all_posts_query)){
 
                         $post_title = $row['post_title'];
-                        $post_author = $row['post_author'];
+                        $post_author = $row['post_user'];
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];
@@ -77,10 +77,10 @@
                                 die("Failed to create comment: " . mysqli_error($connect));
                             }
 
-                            $qry  = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+                            /*$qry  = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
                             $qry .= "WHERE post_id = {$p_id}";
                             $submit_comment = mysqli_query($connect, $qry);
-                            
+                            */
                             if(!$submit_comment){
                                 die("Failed to update comment count: " . mysqli_error($connect));
                             }
