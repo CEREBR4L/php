@@ -50,6 +50,8 @@
     <script src="../js/tinymce/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'textarea' });</script>
 
+    <script src="js/jquery.js"></script>
+
 </head>
 
 <body>
