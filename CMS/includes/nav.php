@@ -28,6 +28,7 @@
                     }
 
                 ?>
+                <li><a href='contact.php'>Contact</a></li>
                 <li><a href='registration.php'>Register</a></li>
                 <li><a href='admin'>Admin</a></li>
                 <?php
