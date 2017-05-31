@@ -18,26 +18,16 @@
                 $username = mysqli_real_escape_string($connect, $username);
                 $password = mysqli_real_escape_string($connect, $password);
                 $email    = mysqli_real_escape_string($connect, $email);
+                $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-                $qry = "SELECT user_randSalt FROM users";
-                $get_salt = mysqli_query($connect, $qry);
-                if(!$get_salt){
-                    die("Query failed to get salt: " . mysqli_error($connect));
+                $qry  = "INSERT INTO users(user_name, user_email, user_password, user_role) ";
+                $qry .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber')";
+                $reg_user = mysqli_query($connect, $qry);
+                if(!$reg_user){
+                    die("Failed to register user: " . mysqli_error($connect) . ' ' . mysqli_errno($connect));
                 }
-
-                while($row = mysqli_fetch_array($get_salt)){
-                    $salt = $row['user_randSalt'];
-                    $password = crypt($password, $salt);
-
-                    $qry  = "INSERT INTO users(user_name, user_email, user_password, user_role) ";
-                    $qry .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber')";
-                    $reg_user = mysqli_query($connect, $qry);
-                    if(!$reg_user){
-                        die("Failed to register user: " . mysqli_error($connect) . ' ' . mysqli_errno($connect));
-                    }
-                    else{
-                        $msg = "<div class='alert alert-success'><strong>User registered!</strong></div>";
-                    }
+                else{
+                    $msg = "<div class='alert alert-success'><strong>User registered!</strong></div>";
                 }
             }
 
