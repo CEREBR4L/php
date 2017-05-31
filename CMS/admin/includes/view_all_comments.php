@@ -34,15 +34,12 @@
                 $comment_date = $row['comment_date'];
                 $comment_status = $row['comment_status'];
 
-                $query =  "SELECT * FROM posts";
-                $query .= " WHERE post_id = {$comment_post_id}";
-
+                $query =  "SELECT * FROM posts ";
+                $query .= " WHERE post_id = {$comment_post_id} ";
                 $select_posts_id = mysqli_query($connect, $query);
+                $row = mysqli_fetch_assoc($select_posts_id);
+                $post_title = $row['post_title'];
 
-                while($row = mysqli_fetch_assoc($select_posts_id)){
-                    $post_id = $row['post_id'];
-                    $post_title = $row['post_title'];
-                }
 
                 echo "<tr>";
                 echo "<td>{$comment_id}</td>";

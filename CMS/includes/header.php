@@ -25,7 +25,7 @@
     <![endif]-->
 
 </head>
-
+<?php include "admin/functions.php"; ?>
 <body>
 
     

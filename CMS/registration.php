@@ -7,30 +7,12 @@
     
         if(isset($_POST['submit'])){
 
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $email    = $_POST['email'];
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
+            $email    = trim($_POST['email']);
 
-            if(empty($username) || empty($password) || empty($email)){
-                $msg = "<div class='alert alert-danger'><strong>Please fill in all the fields.</strong></div>";
-            }
-            else{
-                $username = mysqli_real_escape_string($connect, $username);
-                $password = mysqli_real_escape_string($connect, $password);
-                $email    = mysqli_real_escape_string($connect, $email);
-                $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-
-                $qry  = "INSERT INTO users(user_name, user_email, user_password, user_role) ";
-                $qry .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber')";
-                $reg_user = mysqli_query($connect, $qry);
-                if(!$reg_user){
-                    die("Failed to register user: " . mysqli_error($connect) . ' ' . mysqli_errno($connect));
-                }
-                else{
-                    $msg = "<div class='alert alert-success'><strong>User registered!</strong></div>";
-                }
-            }
-
+            $msg = registerUser($username, $password, $email);
+            loginUser($username, $password);
         }
     
     ?>

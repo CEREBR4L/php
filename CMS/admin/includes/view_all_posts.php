@@ -145,7 +145,15 @@
                     echo "<td>{$post_date}</td>";
                     echo "<td><a href='posts.php?reset={$post_id}'>{$post_views}</a></td>";
                     echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
-                    echo "<td><a class='delete_link' rel='$post_id'' href='javascript:void(0)'>Delete</a></td>";
+                    ?>
+                        <form method="post">
+                            <input type="hidden" name="delete_id" value="<?php echo $post_id; ?>">
+                            <?php 
+                                echo '<td><input class="btn btn-danger delete_link" value="Delete" type="submit" name="delete"></td>'; 
+                            ?>
+                        </form>
+                    <?php
+                    //echo "<td><a class='delete_link' rel='$post_id'' href='javascript:void(0)'>Delete</a></td>";
                     echo "</tr>";
 
                 }
@@ -160,8 +168,8 @@
 
 
 <?php
-    if(isset($_GET['delete'])){
-        $del_post_id = $_GET['delete'];
+    if(isset($_POST['delete'])){
+        $del_post_id = $_POST['delete_id'];
         $query = "DELETE FROM posts WHERE post_id = {$del_post_id}";
         $delete_qry = mysqli_query($connect, $query);
         header("Location: posts.php");

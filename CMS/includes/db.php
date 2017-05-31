@@ -1,5 +1,6 @@
 <?php 
-
+    ob_start();
+    
     $db['db_host'] = "localhost";
     $db['db_user'] = "root";
     $db['db_pass'] = "";
