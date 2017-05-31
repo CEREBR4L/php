@@ -1,5 +1,16 @@
 <?php 
 
+    function GetRecordCount($table, $where){
+        global $connect;
+        $qry  = "SELECT * FROM " . $table;
+        if($where != ""){
+            $qry .= " WHERE " . $where;
+        }
+
+        $select = mysqli_query($connect, $qry);
+        return mysqli_num_rows($select);
+    }
+
     function usersOnline(){
 
         if(isset($_GET['onlineusers'])){

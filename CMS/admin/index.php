@@ -20,21 +20,10 @@
 
                         <div class="row">
                             <?php
-                                $qry = "SELECT * FROM posts WHERE post_status = 'published'";
-                                $select_published_posts = mysqli_query($connect, $qry);
-                                $published_post_count = mysqli_num_rows($select_published_posts);
-
-                                $qry = "SELECT * FROM posts WHERE post_status = 'draft'";
-                                $select_draft_posts = mysqli_query($connect, $qry);
-                                $draft_post_count = mysqli_num_rows($select_draft_posts);
-
-                                $qry = "SELECT * FROM comments WHERE comment_status = 'approved'";
-                                $select_approved_comments = mysqli_query($connect, $qry);
-                                $approved_comments_count = mysqli_num_rows($select_approved_comments);
-
-                                $qry = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
-                                $select_unapproved_comments = mysqli_query($connect, $qry);
-                                $unapproved_comments_count = mysqli_num_rows($select_unapproved_comments);
+                                $published_post_count = GetRecordCount("posts", "post_status = 'published'");
+                                $draft_post_count = GetRecordCount("posts", "post_status = 'draft'");
+                                $approved_comments_count = GetRecordCount("comments", " comment_status = 'approved'");
+                                $unapproved_comments_count = GetRecordCount("comments", " comment_status = 'unapproved'");
                             ?>
 
                             <script type="text/javascript">

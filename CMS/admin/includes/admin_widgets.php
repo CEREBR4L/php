@@ -1,21 +1,9 @@
 
 <?php
-
-    $qry = "SELECT * FROM posts";
-    $select_posts = mysqli_query($connect, $qry);
-    $post_count = mysqli_num_rows($select_posts);
-
-    $qry = "SELECT * FROM comments";
-    $select_comments = mysqli_query($connect, $qry);
-    $comment_count = mysqli_num_rows($select_comments);
-
-    $qry = "SELECT * FROM users";
-    $select_users = mysqli_query($connect, $qry);
-    $user_count = mysqli_num_rows($select_users);
-
-    $qry = "SELECT * FROM categories";
-    $select_categories = mysqli_query($connect, $qry);
-    $categories_count = mysqli_num_rows($select_categories);
+    $post_count = GetRecordCount("posts", "");
+    $comment_count = GetRecordCount("comments", "");
+    $user_count = GetRecordCount("users", "");
+    $categories_count = GetRecordCount("categories", "");
 ?>
 
 <!-- /.row -->
