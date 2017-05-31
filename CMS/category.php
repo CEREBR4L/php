@@ -20,9 +20,21 @@
                     if(isset($_GET['cat'])){
                         $cat_id = $_GET['cat'];
                     }
+                    else{
+                        header("Location index.php");
+                    }
 
-                    $query = "SELECT * FROM posts WHERE post_category_id = {$cat_id}";
+                    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'){
+                        $query = "SELECT * FROM posts WHERE post_category_id = {$cat_id}";
+                    }
+                    else{
+                        $query = "SELECT * FROM posts WHERE post_category_id = {$cat_id} AND post_status = 'published'";
+                    }
+
                     $select_posts_by_cat_query = mysqli_query($connect, $query);
+                    if(mysqli_num_rows($select_posts_by_cat_query) == 0){
+                        echo "<h1>No Posts here!</h1>";
+                    }
 
                     while($row = mysqli_fetch_assoc($select_posts_by_cat_query)){
 
