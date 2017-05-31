@@ -12,6 +12,8 @@
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
+        <!--<li><a href="">Users online: <php echo usersOnline(); ?></a></li>-->
+        <li><a href="">Users online: <span id="usersOnline"></span></a></li>
         <li class=""><a href="../">Home</a></li>
 
         <li class="dropdown">
