@@ -53,6 +53,16 @@
 
     <!-- Login -->
     <div class="well">
+
+        <?php if(isset($_SESSION['user_role'])): ?>
+
+            <h4>Logged in as <?php echo $_SESSION['username']; ?></h4>
+            <a href="includes/logout.php" class="btn btn-primary">Logout</a>
+
+        <?php 
+            else:
+        ?>
+
         <h4>Login</h4>
         <form action="includes/login.php" method="post">
 
@@ -69,6 +79,8 @@
             </div>
 
         </form>
+
+        <?php endif; ?>
         <!-- /.input-group -->
     </div>
 

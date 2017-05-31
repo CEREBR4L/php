@@ -25,6 +25,7 @@
 
                     while($row = mysqli_fetch_array($clone_posts_bulk)){
                         $post_author = $row['post_author'];
+                        $post_user = $row['post_user'];
                         $post_title = $row['post_title'];
                         $post_category_id = $row['post_category_id'];
                         $post_status = $row['post_status'];
@@ -35,11 +36,11 @@
                     }
 
                     $query = "INSERT INTO posts( ";
-                    $query .= "         post_category_id, post_title, post_author, post_date, post_image, "; 
+                    $query .= "         post_category_id, post_title, post_author, post_user, post_date, post_image, "; 
                     $query .= "         post_content, post_tags, post_status ";
                     $query .= "      ) ";
                     $query .= "VALUES( ";
-                    $query .= "         {$post_category_id}, '{$post_title}', '{$post_author}', {$post_date}, "; 
+                    $query .= "         {$post_category_id}, '{$post_title}', '{$post_author}', '{$post_user}', {$post_date}, "; 
                     $query .= "        '{$post_image}', '{$post_content}', '{$post_tags}', "; 
                     $query .= "        '{$post_status}' ";
                     $query .= "      ) ";
