@@ -70,13 +70,10 @@
 
             }
             else{
-
-                $query  = " INSERT INTO categories(cat_title) ";
-                $query .= " VALUES('{$cat_title}') ";
-
-                $create_category = mysqli_query($connect, $query);
-
-                if(!$create_category){
+                $query = mysqli_prepare($connect, "INSERT INTO categories(cat_title) VALUES(?) ");
+                mysqli_stmt_bind_param($query, 's', $cat_title);
+                mysqli_stmt_execute($query);
+                if(!$query){
 
                     die("Error creating category: " . mysqli_error);
 

@@ -30,18 +30,17 @@
             }
 
             if(isset($_POST['update'])){
-
                 $cat_title_update = $_POST['cat_title'];
 
-                $query  = " UPDATE categories ";
-                $query .= "    SET cat_title = '{$cat_title_update}' ";
-                $query .= "  WHERE cat_id = {$cat_id} ";
+                $query = mysqli_prepare($connect, "UPDATE categories SET cat_title = ? WHERE cat_id = ?");
+                mysqli_stmt_bind_param($query, 'si', $cat_title_update, $cat_id);
+                mysqli_stmt_execute($query);
 
-                $update_category = mysqli_query($connect, $query);
-
-                if(!$update_category){
+                if(!$query){
                     die("Error updating this record: " . mysqli_error($connect) ); 
                 }
+
+                header("Location: categories.php");
             }
 
         ?>

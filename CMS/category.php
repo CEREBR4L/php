@@ -24,7 +24,7 @@
                         header("Location index.php");
                     }
 
-                    if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'){
+                    if(is_admin($_SESSION['username'])){
                         $query = "SELECT * FROM posts WHERE post_category_id = {$cat_id}";
                     }
                     else{
