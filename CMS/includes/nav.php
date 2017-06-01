@@ -39,14 +39,14 @@
                             $contact_class = 'active';
                         }
 
-                        echo "<li class={$category_class}><a href='category.php?cat={$cat_id}'>{$cat_title}</a></li>";
+                        echo "<li class={$category_class}><a href='/myCMS/category/{$cat_id}'>{$cat_title}</a></li>";
 
                     }
 
                 ?>
-                <li class=<?php echo $contact_class ?>><a href='contact.php'>Contact</a></li>
-                <li class=<?php echo $registration_class ?>><a href='registration.php'>Register</a></li>
-                <li><a href='admin'>Admin</a></li>
+                <li class=<?php echo $contact_class ?>><a href='/myCMS/contact'>Contact</a></li>
+                <li class=<?php echo $registration_class ?>><a href='/myCMS/registration'>Register</a></li>
+                <li><a href='/myCMS/admin'>Admin</a></li>
                 <?php
                     if(isset($_SESSION['user_id'])){
                         if(isset($_GET['p_id'])){
